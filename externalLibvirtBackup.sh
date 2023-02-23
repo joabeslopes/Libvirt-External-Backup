@@ -7,7 +7,7 @@
 
 IpBkpServ=0.0.0.0	  		# IP of your backup server
 UsrBkpServ=username			# Username of backup server
-FolderBkpServ=/folder/of/backup		# Folder of your backup server
+FolderBkpServ=/folder/of/VMbackup		# Folder of your backup server
 
 cd /var/lib/libvirt/images
 for vm in ./*
