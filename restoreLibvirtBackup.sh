@@ -4,16 +4,16 @@
 
 ipBkpServ=0.0.0.0	  		            # IP of your backup server
 portBkpServer=22                  # SSH port of backup server (default: 22)
-usrBkpServ=username			            # Username of backup server
-folderBkpServ=/folder/ofBackup		# Folder of your backup server
+usrBkpServ=username			            # Username of backup server (important let the * in the end)
+FolderBkpServ=/backup/vms/*		# Folder of your backup server
 restoreFolder=/var/lib/libvirt/images   # Restore directly to the original place
 
-rsync -ave 'ssh -p $portBkpServer' $usrBkpServ@$ipBkpServ:$folderBkpServ $restoreFolder/restore
+rsync -av $UsrBkpServ@$IpBkpServ:$FolderBkpServ $restoreFolder/restore
 
 for vm in $restoreFolder/restore/*
 do
  	vm=${vm##*/}
-    virsh define $vm/$vm.xml
-    mv $vm/$vm.qcow2 $restoreFolder
+	mv $vm/$vm.qcow2 $restoreFolder
+	virsh define $vm/$vm.xml
 done
 rm -r $restoreFolder/restore
