@@ -6,6 +6,7 @@
 
 
 ipBkpServ=0.0.0.0	  		# IP of your backup server
+portBkpServer=22                        # SSH port of backup server (default: 22)
 usrBkpServ=username			# Username of backup server
 folderBkpServ=/folder/of/VMbackup		# Folder of your backup server
 
@@ -16,7 +17,6 @@ do
  	vm=${vm##*/}
 # this 2 lines are there for apply a 'filter', keeping only the vm name on the variable
 	virsh dumpxml $vm > $vm.xml
-	rsync -av --mkpath $vm.xml $usrBkpServ@$ipBkpServ:$folderBkpServ/$vm/
-	rsync -av --mkpath $vm.qcow2 $usrBkpServ@$ipBkpServ:$folderBkpServ/$vm/
+	rsync -ave 'ssh -p $portBkpServer' --mkpath $vm.* $usrBkpServ@$ipBkpServ:$folderBkpServ/$vm/
 rm $vm.xml
 done
