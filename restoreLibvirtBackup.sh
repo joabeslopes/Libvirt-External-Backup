@@ -2,12 +2,13 @@
 
 # With all the required programs reinstalled:
 
-IpBkpServ=0.0.0.0	  		            # IP of your backup server
-UsrBkpServ=username			            # Username of backup server
-FolderBkpServ=/folder/of/VMbackup		# Folder of your backup server
+ipBkpServ=0.0.0.0	  		            # IP of your backup server
+portBkpServer=22                  # SSH port of backup server (default: 22)
+usrBkpServ=username			            # Username of backup server
+folderBkpServ=/folder/ofBackup		# Folder of your backup server
 restoreFolder=/var/lib/libvirt/images   # Restore directly to the original place
 
-rsync -av $UsrBkpServ@$IpBkpServ:$FolderBkpServ $restoreFolder/restore
+rsync -ave 'ssh -p $portBkpServer' $usrBkpServ@$ipBkpServ:$folderBkpServ $restoreFolder/restore
 
 for vm in $restoreFolder/restore/*
 do
