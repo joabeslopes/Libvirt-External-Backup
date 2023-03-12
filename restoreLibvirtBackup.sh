@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# With all the required programs reinstalled:
+# Before do it, don't forget to reinstall all the necessary packages of virt-manager, rsync, ...
 
 ipBkpServ=0.0.0.0	  	        # IP of your backup server
 portBkpServer=22                        # SSH port of backup server (default: 22)
